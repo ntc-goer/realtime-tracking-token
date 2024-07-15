@@ -1,0 +1,8 @@
+infura_url: https://sepolia.infura.io/v3/d421478f75d24b0e9535d06337951a3c
+server_port: 8080
+worker_quantity: 5
+mongodb:
+  host: 127.0.0.1:27017
+  username: admin
+  password: Abc12345
+  database: parser_db

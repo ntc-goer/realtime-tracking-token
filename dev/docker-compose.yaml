@@ -1,0 +1,36 @@
+services:
+  mongo_db:
+    container_name: parser_db
+    image: mongo:5.0.5
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_DATABASE: parser_db
+      MONGO_INITDB_USERNAME: admin
+      MONGO_INITDB_PASSWORD: Abc12345
+    volumes:
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+
+  api:
+    container_name: api
+    depends_on:
+      - mongo_db
+    ports:
+      - "8080:8080"
+    build:
+      context: ./../
+      dockerfile: api.Dockerfile
+    environment:
+      - INFURA_URL=https://sepolia.infura.io/v3/d421478f75d24b0e9535d06337951a3c
+      - DB_HOST=mongo_db:27017
+
+  worker:
+    container_name: worker
+    depends_on:
+      - api
+    build:
+      context: ./../
+      dockerfile: worker.Dockerfile
+    environment:
+      - INFURA_URL=https://sepolia.infura.io/v3/d421478f75d24b0e9535d06337951a3c
+      - DB_HOST=mongo_db:27017
