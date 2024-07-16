@@ -28,6 +28,7 @@ func (c *CoreHTTPServer) AddCoreRouter() {
 	c.Engine.GET("", func(ctx *gin.Context) {
 		ctx.String(http.StatusOK, "Welcome to parser")
 	})
+	c.Engine.GET("current-block", c.TransactionHandler.GetCurrentBlockNumber)
 	c.Engine.GET("subscribes", c.SubscribeHandler.GetAll)
 	c.Engine.POST("subscribe", c.SubscribeHandler.Subscribe)
 	c.Engine.POST("unsubscribe", c.SubscribeHandler.UnSubscribe)

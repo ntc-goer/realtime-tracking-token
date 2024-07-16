@@ -15,6 +15,10 @@ func NewService(r *Repository) *Service {
 	}
 }
 
+func (s *Service) GetOne(ctx context.Context, filter bson.M) (*Subscribe, error) {
+	return s.Repository.GetOne(ctx, filter)
+}
+
 func (s *Service) Subscribe(ctx context.Context, addr string) error {
 	return s.Repository.Subscribe(ctx, addr)
 }

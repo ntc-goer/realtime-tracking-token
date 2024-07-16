@@ -1,0 +1,88 @@
+{
+	"info": {
+		"_postman_id": "aac995df-89ce-460f-af67-816f7e117b36",
+		"name": "Parser_API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "34266719"
+	},
+	"item": [
+		{
+			"name": "Get valid subscriber",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:8080/subscribes"
+			},
+			"response": []
+		},
+		{
+			"name": "Get all transaction related to address",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/transactions?address=0x535f548601FEff5586388E620fFe280259eC8f0D",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"transactions"
+					],
+					"query": [
+						{
+							"key": "address",
+							"value": "0x535f548601FEff5586388E620fFe280259eC8f0D"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Unsubcribe address",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"address\": \"0x535f548601FEff5586388E620fFe280259eC8f0D\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/unsubscribe"
+			},
+			"response": []
+		},
+		{
+			"name": "Get latest block",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:8080/current-block"
+			},
+			"response": []
+		},
+		{
+			"name": "Subcribe address",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"address\": \"0x535f548601FEff5586388E620fFe280259eC8f0D\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/subscribe"
+			},
+			"response": []
+		}
+	]
+}

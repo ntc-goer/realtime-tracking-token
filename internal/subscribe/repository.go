@@ -19,6 +19,15 @@ func NewRepository(db *mongo.Database) *Repository {
 	}
 }
 
+func (r *Repository) GetOne(ctx context.Context, filter bson.M) (*Subscribe, error) {
+	var sub Subscribe
+	res := r.Collection.FindOne(ctx, filter)
+	if err := res.Decode(&sub); err != nil {
+		return nil, err
+	}
+	return &sub, nil
+}
+
 func (r *Repository) Subscribe(ctx context.Context, addr string) error {
 	opts := options.Update().SetUpsert(true)
 	_, err := r.Collection.UpdateOne(ctx, bson.M{
@@ -39,7 +48,7 @@ func (r *Repository) Subscribe(ctx context.Context, addr string) error {
 
 func (r *Repository) UnSubscribe(ctx context.Context, addr string) error {
 	_, err := r.Collection.UpdateOne(ctx, bson.M{
-		"addr": addr,
+		"address": addr,
 	}, bson.M{
 		"$set": bson.M{
 			"deletedAt": time.Now().UTC(),
